@@ -1,39 +1,39 @@
-# 리눅스 커널 설정
+# 리눅스 커널 compile
+## Linux menuconfig
 Type below on command prompt
+
     $make ARCH=arm menuconfig
 
-printk 설정
- - Kernel hacking --> printk and dmesg options --> Show timing information on printks
+## printk 설정
+- Kernel hacking --> printk and dmesg options --> Show timing information on printks
 CONFIG_DEBUG_LL
- - Kernel hacking -> Kernel low-level debugging functions
+- Kernel hacking -> Kernel low-level debugging functions
 CONFIG_DEBUG_LL_UART_PL01X (CONFIG_DEBUG_LL)
                   -> Kernel low-level debugging port -> Kernel low-level debugging via ARM Ltd PL01x Primecell
 CONFIG_EARLY_PRINTK (CONFIG_DEBUG_LL)
- - Kernel hacking -> Early printk
+- Kernel hacking -> Early printk
 
+## zImage 컴파일
 
-zImage 컴파일
-make ARCH=arm CROSS_COMPILE=arm-none-eabi- -j2 zImage
+    $make ARCH=arm CROSS_COMPILE=arm-none-eabi- -j2 zImage
 
+## QEMU 실행
 
-QEMU 실행
-qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M
-
+    $qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M
 QEMU에서 Ctrl+Alt+3 누르면 serial0 console로 전환가능
 serial0 console에서 다음과 같이 출력되면서 중지됨
-"
-Uncompressing Linux... done, booting the kernel.
-no ATAGS support: can't continue
-"
+
+    Uncompressing Linux... done, booting the kernel.
+    no ATAGS support: can't continue
 ATAGS 옵션 설정이 필요할 듯
 
-CONFIG_ATAGS
-Boot options -> Support for the tradditional ATAGS boot data passing
+## CONFIG_ATAGS
++Boot options -> Support for the tradditional ATAGS boot data passing
 
-
-다시 zImage 컴파일 후 QMEMU 실행
+## 다시 zImage 컴파일 후 QMEMU 실행
 에러발생
-"
+
+>
 Error: unrecognized/unsupported machine ID (r1 = 0x00000113).
 
 Available machine support:
