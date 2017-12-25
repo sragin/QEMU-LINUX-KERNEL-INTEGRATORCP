@@ -1,4 +1,4 @@
-#리눅스 커널 설정
+#h1 리눅스 커널 설정
 Type below on command prompt
     $make ARCH=arm menuconfig
 
