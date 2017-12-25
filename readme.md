@@ -1,7 +1,8 @@
-¸®´ª½º Ä¿³Î ¼³Á¤
-make ARCH=arm menuconfig
+#ë¦¬ëˆ…ìŠ¤ ì»¤ë„ ì„¤ì •
+Type below on command prompt
+    $make ARCH=arm menuconfig
 
-printk ¼³Á¤
+printk ì„¤ì •
  - Kernel hacking --> printk and dmesg options --> Show timing information on printks
 CONFIG_DEBUG_LL
  - Kernel hacking -> Kernel low-level debugging functions
@@ -11,27 +12,27 @@ CONFIG_EARLY_PRINTK (CONFIG_DEBUG_LL)
  - Kernel hacking -> Early printk
 
 
-zImage ÄÄÆÄÀÏ
+zImage ì»´íŒŒì¼
 make ARCH=arm CROSS_COMPILE=arm-none-eabi- -j2 zImage
 
 
-QEMU ½ÇÇà
+QEMU ì‹¤í–‰
 qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M
 
-QEMU¿¡¼­ Ctrl+Alt+3 ´©¸£¸é serial0 console·Î ÀüÈ¯°¡´É
-serial0 console¿¡¼­ ´ÙÀ½°ú °°ÀÌ Ãâ·ÂµÇ¸é¼­ ÁßÁöµÊ
+QEMUì—ì„œ Ctrl+Alt+3 ëˆ„ë¥´ë©´ serial0 consoleë¡œ ì „í™˜ê°€ëŠ¥
+serial0 consoleì—ì„œ ë‹¤ìŒê³¼ ê°™ì´ ì¶œë ¥ë˜ë©´ì„œ ì¤‘ì§€ë¨
 "
 Uncompressing Linux... done, booting the kernel.
 no ATAGS support: can't continue
 "
-ATAGS ¿É¼Ç ¼³Á¤ÀÌ ÇÊ¿äÇÒ µí
+ATAGS ì˜µì…˜ ì„¤ì •ì´ í•„ìš”í•  ë“¯
 
 CONFIG_ATAGS
 Boot options -> Support for the tradditional ATAGS boot data passing
 
 
-´Ù½Ã zImage ÄÄÆÄÀÏ ÈÄ QMEMU ½ÇÇà
-¿¡·¯¹ß»ı
+ë‹¤ì‹œ zImage ì»´íŒŒì¼ í›„ QMEMU ì‹¤í–‰
+ì—ëŸ¬ë°œìƒ
 "
 Error: unrecognized/unsupported machine ID (r1 = 0x00000113).
 
@@ -45,75 +46,75 @@ ffffffff        ARM Integrator/CP (Device Tree)
 Please check your kernel config and/or bootloader.
 "
 
-Ä¿³Î ÄÄÆÄÀÏ (DTBÆÄÀÏ »ı¼º)
+ì»¤ë„ ì»´íŒŒì¼ (DTBíŒŒì¼ ìƒì„±)
 make ARCH=arm CROSS_COMPILE=arm-none-eabi- -j2
 
 
-QEMU ½ÇÇà½Ã DTB¿É¼Ç ¼³Á¤
+QEMU ì‹¤í–‰ì‹œ DTBì˜µì…˜ ì„¤ì •
 qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -dtb ./arch/arm/boot/dts/integratorcp.dtb -serial stdio
 "
 ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(1,0)
 "
-root file systemÀÌ ¾ø´Ù¸é¼­ Á¾·áµÊ.
-root file system¸¸ »ı¼ºÇØ ÁÖ¸é ºÎÆÃ µÉ µí
+root file systemì´ ì—†ë‹¤ë©´ì„œ ì¢…ë£Œë¨.
+root file systemë§Œ ìƒì„±í•´ ì£¼ë©´ ë¶€íŒ… ë  ë“¯
 
 
-¿©±â¼­ºÎÅÍ´Â ¾Æ·¡ »çÀÌÆ® ÂüÁ¶.
+ì—¬ê¸°ì„œë¶€í„°ëŠ” ì•„ë˜ ì‚¬ì´íŠ¸ ì°¸ì¡°.
 https://medicineyeh.wordpress.com/2016/03/29/buildup-your-arm-image-for-qemu/
 
-FHANDLE Àû¿ë
+FHANDLE ì ìš©
 General setup  --->
 [*] open by fhandle syscalls
 
-devtmpfs Àû¿ë
+devtmpfs ì ìš©
 Device Drivers  --->
   Generic Driver Options  --->
     [*] Maintain a devtmpfs filesystem to mount at /dev
     [*]   Automount devtmpfs at /dev, after the kernel mounted the rootfs
 
-root file systemÀ» ¸¸µé±â À§ÇØ buildroot »ç¿ë
-WSL¿¡¼­ ¹®Á¦¹ß»ı... ÄÄÆÄÀÏ·¯ º¹»ç ¿¡·¯
+root file systemì„ ë§Œë“¤ê¸° ìœ„í•´ buildroot ì‚¬ìš©
+WSLì—ì„œ ë¬¸ì œë°œìƒ... ì»´íŒŒì¼ëŸ¬ ë³µì‚¬ ì—ëŸ¬
 
 
-cpio À¯Æ¿·Î ÆÄÀÏ½Ã½ºÅÛ »ı¼º
+cpio ìœ í‹¸ë¡œ íŒŒì¼ì‹œìŠ¤í…œ ìƒì„±
 
-SYSV, V7, ROMFS ÆÄÀÏ½Ã½ºÅÛ Áö¿ø Ãß°¡
+SYSV, V7, ROMFS íŒŒì¼ì‹œìŠ¤í…œ ì§€ì› ì¶”ê°€
 $ echo final_image.elf | cpio -o --format=newc > rootfs
-qemu ½ÇÇàÇÒ ¶§ initrd ¿É¼Ç Ãß°¡
+qemu ì‹¤í–‰í•  ë•Œ initrd ì˜µì…˜ ì¶”ê°€
 qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -dtb ./arch/arm/boot/dts/integratorcp.dtb -serial stdio -initrd ../my_os/rootfs
 
-¾Æ·¡ ¸Ş½ÃÁö¸¦ Ãâ·ÂÇÏ¸é¼­ Ä¿³ÎÆĞ´Ğ
+ì•„ë˜ ë©”ì‹œì§€ë¥¼ ì¶œë ¥í•˜ë©´ì„œ ì»¤ë„íŒ¨ë‹‰
 "
 [    1.222003] No filesystem could mount root, tried:  ext2 cramfs vfat sysv v7 romfs
 "
-»ı¼ºµÈ rootfs°¡ ÇöÀç ÄÄÆÄÀÏµÈ zImage¿¡¼­ Áö¿øµÇÁö ¾ÊÀ½
-¾î¶²°Ô Áö¿øÀÌ µÇ°í ¾î¶²°Ô Áö¿øÀÌ ¾ÈµÇ´ÂÁö?
-¸ğµç ÆÄÀÏ½Ã½ºÅÛ Áö¿øÀ» Æ÷ÇÔÇÏ¸é µÇ´ÂÁö?
+ìƒì„±ëœ rootfsê°€ í˜„ì¬ ì»´íŒŒì¼ëœ zImageì—ì„œ ì§€ì›ë˜ì§€ ì•ŠìŒ
+ì–´ë–¤ê²Œ ì§€ì›ì´ ë˜ê³  ì–´ë–¤ê²Œ ì§€ì›ì´ ì•ˆë˜ëŠ”ì§€?
+ëª¨ë“  íŒŒì¼ì‹œìŠ¤í…œ ì§€ì›ì„ í¬í•¨í•˜ë©´ ë˜ëŠ”ì§€?
 
-¾Æ´Ï°í, rootfs°¡ ½ÇÇàµÇ´Â ¸í·ÉÀ» Ãß°¡ÇßÀ» °æ¿ì hang µÊ.
+ì•„ë‹ˆê³ , rootfsê°€ ì‹¤í–‰ë˜ëŠ” ëª…ë ¹ì„ ì¶”ê°€í–ˆì„ ê²½ìš° hang ë¨.
 -append "root=/dev/ram rdinit=main"
 
 
-ÄÄÆÄÀÏ·¯°¡ ¹®Á¦´Ù....
-arm-none-eabi-gcc ·Î ÄÄÆÄÀÏ ÇßÀ» ¶§´Â Á¦´ë·ÎµÈ ½ÇÇàÆÄÀÏÀÌ »ı¼ºµÇÁö ¾ÊÀ½.
-À©µµ¿ì ¹öÀüÀÇ ÄÄÆÄÀÏ·¯¶ó ±×·¨À» ¼ö ÀÖ³ª??? Ä¿³ÎÀº ÀÌ°É·Î ÄÄÆÄÀÏ Çß´Âµ¥???
+ì»´íŒŒì¼ëŸ¬ê°€ ë¬¸ì œë‹¤....
+arm-none-eabi-gcc ë¡œ ì»´íŒŒì¼ í–ˆì„ ë•ŒëŠ” ì œëŒ€ë¡œëœ ì‹¤í–‰íŒŒì¼ì´ ìƒì„±ë˜ì§€ ì•ŠìŒ.
+ìœˆë„ìš° ë²„ì „ì˜ ì»´íŒŒì¼ëŸ¬ë¼ ê·¸ë¬ì„ ìˆ˜ ìˆë‚˜??? ì»¤ë„ì€ ì´ê±¸ë¡œ ì»´íŒŒì¼ í–ˆëŠ”ë°???
 
-arm-linux-gnueabi-gcc ·Î ÄÄÆÄÀÏ ÈÄ¿¡ 
+arm-linux-gnueabi-gcc ë¡œ ì»´íŒŒì¼ í›„ì— 
 https://landley.net/writing/rootfs-howto.html
-ÂüÁ¶ÇÏ¿© initramfs ¸¸µç ÈÄ ½ÇÇàÇÏ´Ï ±ò²ûÇÏ°Ô Àß µÊ.
+ì°¸ì¡°í•˜ì—¬ initramfs ë§Œë“  í›„ ì‹¤í–‰í•˜ë‹ˆ ê¹”ë”í•˜ê²Œ ì˜ ë¨.
 
-È­¸éÀº ¿Ö ¾È³ª¿Ã±î???
+í™”ë©´ì€ ì™œ ì•ˆë‚˜ì˜¬ê¹Œ???
 
 Device Drivers
  Graphics support
   [*]Bootup logo
      Console display driver support --->
       <*> Framebuffer Console support
-¼³Á¤ ÈÄ Ä¿³ÎÄÄÆÄÀÏ ÈÄ QEMU Àç½ÇÇà ÇÏ´Ï ·Î°í°¡ ³ª¿È.. 
+ì„¤ì • í›„ ì»¤ë„ì»´íŒŒì¼ í›„ QEMU ì¬ì‹¤í–‰ í•˜ë‹ˆ ë¡œê³ ê°€ ë‚˜ì˜´.. 
 
-¼º°ø!!
+ì„±ê³µ!!
 
 qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -dtb ./arch/arm/boot/dts/integratorcp.dtb -serial stdio -initrd ../my_os/initramfs_data.cpio.gz -append "console=tty0 earlyprintk init=/init"
-¸í·ÉÀ¸·Î ½ÇÇàÇÏ´Ï console¿¡¼­ ¸®´ª½º ºÎÆÃ¸Ş½ÃÁö È®ÀÎ°¡´É
+ëª…ë ¹ìœ¼ë¡œ ì‹¤í–‰í•˜ë‹ˆ consoleì—ì„œ ë¦¬ëˆ…ìŠ¤ ë¶€íŒ…ë©”ì‹œì§€ í™•ì¸ê°€ëŠ¥
 
-¿ÏÀü ¼º°ø!!!
+ì™„ì „ ì„±ê³µ!!!
