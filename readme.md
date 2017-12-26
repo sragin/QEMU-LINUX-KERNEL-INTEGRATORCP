@@ -69,8 +69,9 @@ ATAGS 옵션 설정이 필요할 듯?
 
     $qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -serial stdio -dtb ./arch/arm/boot/dts/integratorcp.dtb
 
-QEMU 실행 후 아래 메시지를 출력하면서 커널패닉
-root file system이 없다면서 종료됨. root file system만 생성해 주면 부팅 될 듯?
+QEMU 실행 후 아래 메시지를 출력하면서 커널패닉.
+root file system이 없다면서 종료됨.
+root file system만 생성해 주면 부팅 될 듯?
 
 > end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(1,0)
 
