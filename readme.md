@@ -1,17 +1,26 @@
-# 리눅스 커널 compile
+# LINUX KERNEL COMPILE ON QEMU INTEGRATOR/CP BOARD
 ## Linux menuconfig
-Type below on command prompt
+아래 명령어를 command prompt에 입력
 
     $make ARCH=arm menuconfig
 
-## printk 설정
-- Kernel hacking --> printk and dmesg options --> Show timing information on printks
-CONFIG_DEBUG_LL
-- Kernel hacking -> Kernel low-level debugging functions
-CONFIG_DEBUG_LL_UART_PL01X (CONFIG_DEBUG_LL)
-                  -> Kernel low-level debugging port -> Kernel low-level debugging via ARM Ltd PL01x Primecell
-CONFIG_EARLY_PRINTK (CONFIG_DEBUG_LL)
-- Kernel hacking -> Early printk
+### printk 설정
+* Kernel hacking 
+    * printk and dmesg options 
+        * Show timing information on printks
+
+### CONFIG_DEBUG_LL
+* Kernel hacking
+    * Kernel low-level debugging functions
+
+### CONFIG_DEBUG_LL_UART_PL01X (CONFIG_DEBUG_LL)
+* Kernel hacking
+    * Kernel low-level debugging port
+        * Kernel low-level debugging via ARM Ltd PL01x Primecell
+
+### CONFIG_EARLY_PRINTK (CONFIG_DEBUG_LL)
+* Kernel hacking
+    * Early printk
 
 ## zImage 컴파일
 
@@ -21,42 +30,49 @@ CONFIG_EARLY_PRINTK (CONFIG_DEBUG_LL)
 
     $qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M
 QEMU에서 Ctrl+Alt+3 누르면 serial0 console로 전환가능
-serial0 console에서 다음과 같이 출력되면서 중지됨
+혹은 아래 명령으로 QEMU 실행시 serial 출력을 stdio에서 볼 수 있음
+
+    $qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -serial stdio
+
+QEMU 실행 후 serial0 console에서 다음과 같이 출력되면서 중지됨
 
     Uncompressing Linux... done, booting the kernel.
     no ATAGS support: can't continue
-ATAGS 옵션 설정이 필요할 듯
+ATAGS 옵션 설정이 필요할 듯?
 
 ## CONFIG_ATAGS
-+Boot options -> Support for the tradditional ATAGS boot data passing
 
-## 다시 zImage 컴파일 후 QMEMU 실행
-에러발생
+    $make ARCH=arm menuconfig
+* Boot options
+    * Support for the tradditional ATAGS boot data passing
 
->
-Error: unrecognized/unsupported machine ID (r1 = 0x00000113).
+## zImage compile 후 QEMU 실행
+아래와 같이 에러발생. Device Tree를 입력해주어야 하는데 입력해주지 않아 발생한 에러
 
-Available machine support:
+>Error: unrecognized/unsupported machine ID (r1 = 0x00000113).
 
-ID (hex)        NAME
-ffffffff        Generic DT based system
-ffffffff        ARM Integrator/AP (Device Tree)
-ffffffff        ARM Integrator/CP (Device Tree)
+>Available machine support:
 
-Please check your kernel config and/or bootloader.
-"
+>ID (hex)        NAME
+>ffffffff        Generic DT based system
+>ffffffff        ARM Integrator/AP (Device Tree)
+>ffffffff        ARM Integrator/CP (Device Tree)
 
-커널 컴파일 (DTB파일 생성)
-make ARCH=arm CROSS_COMPILE=arm-none-eabi- -j2
+>Please check your kernel config and/or bootloader.
 
+## DEVICE TREE 입력
+### DEVICE TREE FILE 생성 (DTB FILE) : KERNEL COMPILE
 
-QEMU 실행시 DTB옵션 설정
-qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -dtb ./arch/arm/boot/dts/integratorcp.dtb -serial stdio
-"
----[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(1,0)
-"
-root file system이 없다면서 종료됨.
-root file system만 생성해 주면 부팅 될 듯
+    $make ARCH=arm CROSS_COMPILE=arm-none-eabi- -j2
+
+### QEMU 실행시 DTB옵션 설정
+
+    $qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -serial stdio -dtb ./arch/arm/boot/dts/integratorcp.dtb
+
+QEMU 실행 후 아래 메시지를 출력하면서 커널패닉
+root file system이 없다면서 종료됨. root file system만 생성해 주면 부팅 될 듯?
+
+> end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(1,0)
 
 
 여기서부터는 아래 사이트 참조.
