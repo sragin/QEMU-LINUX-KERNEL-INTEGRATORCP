@@ -1,7 +1,6 @@
 # LINUX KERNEL COMPILE ON QEMU INTEGRATOR/CP BOARD ON WSL
 ## Linux menuconfig
 ### Set compile environment
-
     $ cd (linux kernal directory)
     $ export ARCH=arm
     $ export CROSS_COMPLE=arm-linux-gnueabi-
@@ -28,11 +27,9 @@
     [*] Early printk
 
 ## zImage 컴파일
-
     $ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j2 zImage
 
 ## QEMU 실행
-
     $ qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M
 QEMU에서 Ctrl+Alt+3 누르면 serial0 console로 전환가능<br>
 혹은 아래 명령으로 QEMU 실행시 serial 출력을 stdio에서 볼 수 있음
@@ -46,7 +43,6 @@ QEMU 실행 후 serial0 console에서 다음과 같이 출력되면서 중지됨
 ATAGS 옵션 설정이 필요할 듯?
 
 ### CONFIG_ATAGS
-
     $ make menuconfig
 <br>
 
@@ -70,11 +66,9 @@ Device Tree를 입력해주어야 하는데 입력해주지 않아 발생한 에
 
 ## DEVICE TREE 입력
 ### DEVICE TREE FILE 생성 (DTB FILE) : KERNEL COMPILE
-
     $ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j2
 
 ### QEMU 실행시 DTB옵션 설정
-
     $ qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -serial stdio -dtb ./arch/arm/boot/dts/integratorcp.dtb
 
 QEMU 실행 후 아래 메시지를 출력하면서 커널패닉.<br>
@@ -89,16 +83,14 @@ root file system만 생성해 주면 부팅 될 듯?
 https://medicineyeh.wordpress.com/2016/03/29/buildup-your-arm-image-for-qemu/
 
 ### FHANDLE 적용
-
     General setup  --->
     [*] open by fhandle syscalls
 
 ### devtmpfs 적용
-
     Device Drivers  --->
     Generic Driver Options  --->
-    [*] Maintain a devtmpfs filesystem to mount at /dev
-    [*]   Automount devtmpfs at /dev, after the kernel mounted the rootfs
+    [*] Maintain a devtmpfs filesystem to mount at /dev
+    [*]   Automount devtmpfs at /dev, after the kernel mounted the rootfs
 
 ### BUILDROOT 적용 (X)
 root file system을 만들기 위해 buildroot 사용.<br>
@@ -107,7 +99,7 @@ WSL에서 문제발생... 컴파일러 복사 에러
 ### CPIO로 ROOT FILESYSTEM 만들기
 cpio 유틸로 파일시스템 생성<br>
 SYSV, V7, ROMFS 파일시스템 지원 추가
-
+    
     $ echo final_image.elf | cpio -o --format=newc > rootfs
 
 qemu 실행할 때 initrd 옵션 추가
