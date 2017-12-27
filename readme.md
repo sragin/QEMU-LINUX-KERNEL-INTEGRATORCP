@@ -89,10 +89,12 @@ root file system만 생성해 주면 부팅 될 듯?
 https://medicineyeh.wordpress.com/2016/03/29/buildup-your-arm-image-for-qemu/
 
 ### FHANDLE 적용
+
     General setup  --->
     [*] open by fhandle syscalls
 
 ### devtmpfs 적용
+
     Device Drivers  --->
     Generic Driver Options  --->
     [*] Maintain a devtmpfs filesystem to mount at /dev
