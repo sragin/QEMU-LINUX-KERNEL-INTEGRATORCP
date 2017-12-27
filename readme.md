@@ -119,6 +119,7 @@ qemu 실행할 때 initrd 옵션 추가
     -append "root=/dev/ram rdinit=main"
 
 
+## Compiler 변경
 컴파일러가 문제다....<br>
 arm-none-eabi-gcc 로 컴파일 했을 때는 제대로된 실행파일이 생성되지 않음.<br>
 윈도우 버전의 컴파일러라 그랬을 수 있나??? 커널은 이걸로 컴파일 했는데???
@@ -126,7 +127,8 @@ arm-none-eabi-gcc 로 컴파일 했을 때는 제대로된 실행파일이 생�
 arm-linux-gnueabi-gcc 로 컴파일 후에 <br>
 https://landley.net/writing/rootfs-howto.html <br>
 참조하여 initramfs 만든 후 실행하니 깔끔하게 잘 됨. <br>
-<br>
+
+## CLDC 화면에 출력
 화면은 왜 안나올까???
 
     Device Drivers --->
@@ -140,8 +142,6 @@ https://landley.net/writing/rootfs-howto.html <br>
 
         [*] Bootup logo --->
     
-    
-
 설정 후 커널컴파일 후 QEMU 재실행 하니 로고가 나옴.. <br>
 성공!!<br>
 아래명령으로 실행하면 console에서 리눅스 부팅메시지 확인가능
