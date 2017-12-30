@@ -134,7 +134,7 @@ arm-linux-gnueabi-gcc 로 컴파일 후에 <br>
 https://landley.net/writing/rootfs-howto.html <br>
 참조하여 initramfs 만든 후 실행하니 깔끔하게 잘 됨. <br>
 
-## CLDC 화면에 출력
+## CLCD 화면에 출력
 화면은 왜 안나올까???
 
     Device Drivers --->
