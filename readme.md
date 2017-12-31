@@ -3,7 +3,8 @@
 * LINUX KERNEL 4.1.47 lowest LTS on version 4
 * WSL (Ubuntu 16.04. Kernel ver. 4.4.0-43)
 * QEMU 2.5.0
-* ARM-NONE-EABI-GCC 6-2017-q2-update 6.3.1
+* ARM-NONE-EABI-GCC 6-2017-q2-update 6.3.1 - for kernel compile
+* ARM-LINUX-GNUEABI-GCC 5.4.0 - for root file system
 
 ## Linux menuconfig
 ### Set compile environment
