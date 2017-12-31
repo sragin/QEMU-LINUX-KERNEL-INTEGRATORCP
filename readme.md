@@ -40,7 +40,7 @@
 QEMU에서 Ctrl+Alt+3 누르면 serial0 console로 전환가능<br>
 혹은 아래 명령으로 QEMU 실행시 serial 출력을 stdio에서 볼 수 있음
 
-    $qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -serial stdio
+    $ qemu-system-arm -machine integratorcp -kernel ./arch/arm/boot/zImage -m 256M -serial stdio
 
 QEMU 실행 후 serial0 console에서 다음과 같이 출력되면서 중지됨
 
